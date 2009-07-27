@@ -1,0 +1,25 @@
+<h1>Meet Events</h1>
+
+<table>
+  <tr>
+    <th style="width: 20px">No</th>
+    <th style="width: 50px">Distance</th>
+    <th style="width: 100px">Stroke</th>
+    <th style="width: 70px">Age</th>
+    <th style="width: 30px">Gender</th>
+  </tr>
+
+<% i=1
+@events.each do |event| %>
+  <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+    <td style="text-align: right"><b><%= link_to event.Event_no, :action => "results", :id => event %></b></td>
+    <td style="text-align: right"><%= h event.distance %></td>
+    <td><%= h event.stroke %></td>
+    <td><%= h event.age %></td>
+    <td><%= h event.gender %></td>
+    <td><%= link_to 'Program', :action => "program", :id => event %></td>
+    <td><%= link_to 'Results', :action => "results", :id => event %></td>
+  </tr>
+<% i += 1
+end %>
+</table>

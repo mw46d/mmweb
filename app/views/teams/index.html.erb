@@ -1,0 +1,25 @@
+<h1>Teams</h1>
+
+<table>
+  <tr>
+    <th style="width: 200px">Name</th>
+    <th style="width: 50px">Abbr</th>
+    <th style="width: 75px">Athletes</th>
+    <th style="width: 75px">Indiv. Entries</th>
+    <th style="width: 75px">Relays</th>
+    <th style="width: 75px">Scores</th>
+  </tr>
+
+  <% i = 1
+  @teams.sort{|a,b| a.score <=> b.score}.reverse_each do |team| %>
+    <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+      <td><%= link_to team.Team_name, :controller => "athletes", :team_id => team %></td>
+      <td><%= h team.Team_abbr %></td>
+      <td style="text-align: right"><%= h team.athletes.count %></td>
+      <td style="text-align: right"><%= h team.entries %></td>
+      <td style="text-align: right"><%= h team.relays.count %></td>
+      <td style="text-align: right"><%= h score(team.score) %></td>
+    </tr>
+  <% i += 1
+  end -%>
+</table>

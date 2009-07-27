@@ -1,0 +1,65 @@
+<h1>Results #<%= h @event.Event_no.to_s + " - " + @event.distance + " " + @event.stroke +
+  " " + @event.age + " " + @event.gender %>
+</h1>
+
+<% if @event.relay? -%>
+  <p><b>
+    Teams are free to adjust relay swimmers up to the start of the event. The names
+    below reflect the database but might not be the final swimmers. Please check
+    with your coach!
+  </b></p>
+<% end -%>
+
+<h2>Records</h2>
+<% @event.records.each do |r| -%>
+  <b><%= h r.record_tag.tag_flag + " " + r.record_tag.tag_name %>: </b>
+  <%= h r.Record_month.to_s + "/" + r.Record_day.to_s + "/" + r.Record_year.to_s %>
+  <b><%= h r.Record_Holder %></b>, <%= r.Record_Holderteam %>:
+  <b><%= h time(r.Record_Time) %></b>
+  <br />
+<% end -%>
+
+<table>
+  <tr>
+    <th>Place</th>
+    <th>Name</th>
+    <% unless @event.relay? -%>
+    <th>Team</th>
+    <th>Age</th>
+    <% end -%>
+    <th>Seed Time</th>
+    <th>Final Time</th>
+    <th>Points</th>
+  </tr>
+
+  <% i = 1
+  @event.entries.sort { |a, b|
+      a.result_compare(b)
+    }.each do |e|
+    if e.Fin_heat && e.Fin_heat > 0 -%>
+      <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+        <td style="text-align: right"><%= h place(e.Fin_place) %></td>
+        <% if @event.relay? -%>
+          <td><%= link_to(e.team.Team_name, :controller => "athletes", :team_id => e.team) + " " + h(e.Team_ltr) %><br />
+            &nbsp;
+            <% e.relay_names.each do |n|
+              if n.Pos_no < 5
+                a = n.athlete -%>
+                <%= link_to(short_name(a), :controller => "athletes", :action => "show", :id => a) + " " + h(a.Ath_age.to_s) + ", " %>
+              <% end
+            end -%>
+          </td>
+        <% else
+          a = e.athlete -%>
+          <td><%= link_to combined_name(a), :controller => "athletes", :action => "show", :id => a %></td>
+          <td><%= link_to a.team.Team_abbr, :controller => "athletes", :team_id => a.team %></td>
+          <td style="text-align: right"><%= h a.Ath_age %></td>
+        <% end -%>
+        <td style="text-align: right"><%= h time(e.ActualSeed_time) %></td>
+        <td style="text-align: right"><%= h result_time(e, @event.records) %></td>
+        <td style="text-align: right"><%= h score(e.Ev_score) %></td>
+      </tr>
+    <% end
+    i += 1
+  end -%>
+</table>

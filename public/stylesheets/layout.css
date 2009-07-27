@@ -1,0 +1,188 @@
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+#head {
+    width: 100%;
+}
+
+#head_left {
+    background-image:url(../images/corners.png);
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 15px;
+    float: left;
+}
+
+#head_l2 {
+    background-image:url(../images/centers.png);
+    background-position: 0px 0px;
+    height: 150px;
+    width: 70px;
+    float: left;
+}
+
+#head_l3 {
+    background-image:url(../images/corners.png);
+    background-position: 0px -200px;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 15px;
+    float: left;
+}
+
+#head_center {
+    background-image:url(../images/centers.png);
+    background-position: 0px -200px;
+    background-repeat: repeat-x;
+    height: 150px;
+    position: absolute;
+    top: 8px;
+    left: 108px;
+    right: 23px;
+}
+
+#head_right {
+    background-image:url(../images/corners.png);
+    background-position: 0px -400px;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 15px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+#header {
+    position: absolute;
+    top: 0px;
+    left: -100px;
+    right: 265px;
+}
+
+#foot {
+    width: 100%;
+}
+
+#foot_left {
+    background-image:url(../images/corners.png);
+    background-position: 0px -600px;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 15px;
+    float: left;
+}
+
+#foot_l2 {
+    background-image:url(../images/centers.png);
+    background-position: 0px -400px;
+    height: 50px;
+    width: 70px;
+    float: left;
+}
+
+#foot_l3 {
+    background-image:url(../images/corners.png);
+    background-position: 0px -700px;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 15px;
+    float: left;
+}
+
+#foot_center {
+    background-image:url(../images/centers.png);
+    background-position: 0px -500px;
+    background-repeat: repeat-x;
+    height: 50px;
+    position: absolute;
+    left: 108px;
+    right: 23px;
+}
+
+#foot_right {
+    background-image:url(../images/corners.png);
+    background-position: 0px -800px;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 15px;
+    position: absolute;
+    right: 8px;
+}
+
+#footer {
+    position: absolute;
+    top: 0px;
+    left: -100px;
+    right: 0px;
+}
+
+#footer p {
+    font-size: smaller;
+    margin: 8px 15px 8px 15px;
+}
+.h1 {
+    font-size: x-large;
+    font-weight: bold;
+    margin: 30px 25px 30px 25px;
+}
+
+.h2 {
+    font-size: large;
+    font-weight: bold;
+    margin: 0px 25px 10px 25px;
+
+}
+#content {
+    background-image:url(../images/side_center.png);
+    background-repeat: repeat-y;
+}
+
+#pageContent {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+#sideBar {
+    position: relative;
+    float: left;
+    width: 101px;
+    height: 100%;
+    margin-left: 15px;
+    margin-right: 10px;
+    line-height: 25px;
+}
+
+#pageContent {
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+
+h1 {
+    font-size: large;
+    font-weight: bold;
+    margin: 5px 0px 10px 0px;
+}
+
+h2 {
+    font-size: medium;
+    font-weight: bold;
+    margin: 5px 0px 5px 0px;
+}
+
+table {
+    margin: 10px 0px 20px 0px;
+}
+
+th {
+    text-align: left;
+}
+
+tr.odd {
+    background-color: #adc2d3;
+}

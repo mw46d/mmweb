@@ -1,0 +1,66 @@
+<h1><%= h @athlete.Last_name %>,&nbsp;<%= h @athlete.First_name %>&nbsp;<%= h @athlete.Initial %></h1>
+
+<% if @athlete.entries.length > 0 %>
+  <h2>Individual Events</h2>
+
+  <table>
+    <tr>
+      <th>No.</th>
+      <th>Event</th>
+      <th>Heat</th>
+      <th>Lane</th>
+      <th>Seed Time</th>
+      <th>Time</th>
+      <th>Place</th>
+      <th>Points</th>
+    </tr>
+    <% i = 1
+    @athlete.entries.sort{ |a, b| a.Event_ptr <=> b.Event_ptr }.each do |entry|
+      event = entry.event -%>
+      <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+        <td style="text-align: right"><%= link_to event.Event_no, :controller => 'events', :action => 'results', :id => event %></td>
+        <td><%= h event.distance + " " + event.stroke + " " + event.age + " " + event.gender %></td>
+        <td style="text-align: right"><%= h entry.Fin_heat %></td>
+        <td style="text-align: right"><%= h entry.Fin_lane %></td>
+        <td style="text-align: right"><%= h time(entry.ActualSeed_time) %></td>
+        <td style="text-align: right"><%= h result_time(entry) %></td>
+        <td style="text-align: right"><%= h place(entry.Fin_place) %></td>
+        <td style="text-align: right"><%= h score(entry.Ev_score) %></td>
+      </tr>
+    <% i += 1
+    end -%>
+  </table>
+<% end -%>
+
+<% if @athlete.relay_names.length > 0 %>
+  <h2>Relay Events</h2>
+
+  <table>
+    <tr>
+      <th>No.</th>
+      <th>Event</th>
+      <th>Heat</th>
+      <th>Lane</th>
+      <th>Seed Time</th>
+      <th>Time</th>
+      <th>Place</th>
+      <th>Points</th>
+    </tr>
+    <% i = 1
+    @athlete.relay_names.sort{ |a, b| a.relay.Event_ptr <=> b.relay.Event_ptr }.each do |n|
+      relay = n.relay
+      event = relay.event -%>
+      <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+        <td style="text-align: right"><%= link_to event.Event_no, :controller => 'events', :action => 'results', :id => event %></td>
+        <td><%= h event.distance + " " + event.stroke + " " + event.age + " " + event.gender %></td>
+        <td style="text-align: right"><%= h relay.Fin_heat %></td>
+        <td style="text-align: right"><%= h relay.Fin_lane %></td>
+        <td style="text-align: right"><%= h time(relay.ActualSeed_time) %></td>
+        <td style="text-align: right"><%= h result_time(relay) %></td>
+        <td style="text-align: right"><%= h place(relay.Fin_place) %></td>
+        <td style="text-align: right"><%= h score(relay.Ev_score) %></td>
+      </tr>
+    <% i += 1
+    end -%>
+  </table>
+<% end -%>

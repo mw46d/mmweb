@@ -1,0 +1,30 @@
+<h1>
+  <%= @team ? @team.Team_name.strip + " - " : "" %>
+  Athletes
+</h1>
+
+<table>
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Initial</th>
+    <th>Sex</th>
+    <th>Team</th>
+    <th>Age</th>
+    <th>Preferred Name</th>
+  </tr>
+
+  <% i = 1
+  @athletes.each do |athlete| %>
+    <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+      <td><%= link_to athlete.Last_name, athlete %></td>
+      <td><%= h athlete.First_name %></td>
+      <td><%= h athlete.Initial %></td>
+      <td><%= h athlete.Ath_Sex %></td>
+      <td><%= link_to athlete.team.Team_abbr, :controller => "athletes", :team_id => athlete.team %></td>
+      <td style="text-align: right"><%= h athlete.Ath_age %></td>
+      <td><%= h athlete.Pref_name %></td>
+    </tr>
+  <% i += 1
+  end %>
+</table>
