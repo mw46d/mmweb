@@ -1,5 +1,7 @@
-<h1>Program #<%= h @event.Event_no.to_s + " - " + @event.distance + " " + @event.stroke +
+<h1><%= link_to '<<', :action => "program", :id => @event, :direction => 'previous' %>
+  Program #<%= h @event.Event_no.to_s + " - " + @event.distance + " " + @event.stroke +
   " " + @event.age + " " + @event.gender %>
+<%= link_to '>>', :action => "program", :id => @event, :direction => 'next' %>
 </h1>
 
 <% if @event.relay? -%>

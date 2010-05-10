@@ -5,7 +5,11 @@ class Event < ActiveRecord::Base
 
   has_many :i_entries, :class_name => "Entry", :foreign_key => "Event_ptr", :order => "Fin_heat, Fin_lane"
   has_many :r_entries, :class_name => "Relay", :foreign_key => "Event_ptr", :order => "Fin_heat, Fin_lane"
+  has_one :session_item, :class_name => "SessItem", :foreign_key => "Event_ptr"
+  has_one :session, :class_name => "Session", :through => :session_item
 
+  acts_as_ordered :order => 'Event_no'
+  
   def age
     if self.Low_age == 0
       self.High_Age.to_s + " & Under"
@@ -15,7 +19,7 @@ class Event < ActiveRecord::Base
   end
 
   def distance
-    self.Event_dist.to_i.to_s + (self.Event_stat == 'Y' ? "yds" : "m")
+    self.Event_dist.to_i.to_s + session.course
   end
 
   def entries

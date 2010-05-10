@@ -21,7 +21,7 @@ module ApplicationHelper
   def time(f, ns = false)
     if f.nil? || f == 0
       if ns
-        "NS"
+        ""
       else
         "NT"
       end

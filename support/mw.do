@@ -25,7 +25,7 @@ then
     exit 1
 fi
 
-for i in Athlete Entry Event Meet RecordsbyEvent Records RecordTags Relay RelayNames Session Team
+for i in Athlete Entry Event Meet RecordsbyEvent Records RecordTags Relay RelayNames Session Sessitem Team
 do
     echo "Extract $i"
     mdb-schema -T $i "$db" mysql > $TEMPDIR/$i.t
@@ -40,7 +40,7 @@ done
 
 update_last=0
 
-for i in Athlete Entry Event Meet RecordsbyEvent Records RecordTags Relay RelayNames Session Team
+for i in Athlete Entry Event Meet RecordsbyEvent Records RecordTags Relay RelayNames Session Sessitem Team
 do
     echo "Update $i"
     add_data=0

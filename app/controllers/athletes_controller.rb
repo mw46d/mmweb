@@ -13,5 +13,14 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = Athlete.find(params[:id])
+
+    if params[:direction]
+      case params[:direction]
+      when /next/
+        @athlete = @athlete.next(:conditions => {:Team_no => @athlete.Team_no})
+      when /previous/
+        @athlete = @athlete.previous(:conditions => {:Team_no => @athlete.Team_no})
+      end
+    end
   end
 end

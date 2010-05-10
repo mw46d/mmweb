@@ -179,6 +179,18 @@ table {
     margin: 10px 0px 20px 0px;
 }
 
+#athleteTable {
+    margin: 0px 0px 0px 0px;
+}
+
+#athleteTable #firstName, #athleteTable #lastName, #athleteTable #prefName {
+    width: 120px;
+}
+
+#athleteTable #age, #athleteTable #initial, #athleteTable #sex, #athleteTable #team {
+    width: 45px;
+}
+
 th {
     text-align: left;
 }

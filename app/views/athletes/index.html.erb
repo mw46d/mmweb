@@ -3,28 +3,55 @@
   Athletes
 </h1>
 
-<table>
+<div style="margin: 20px 0px 0px 0px;"> </div>
+<% last_char = ""
+anchors = {}
+@athletes.each do |athlete|
+  l = athlete.Last_name.upcase[0,1]
+
+  unless last_char == l
+    anchors[l] = l
+    last_char = l
+  end
+end
+('A' .. 'Z').each do |a|
+-%>
+<%= anchors[a] ? '<a href="#' + anchors[a] + '">' : '' %><%= a %><%= anchors[a] ? '</a>' : '' %>&nbsp;
+<% end -%>
+<br />
+<div style="margin: 20px 0px 0px 0px;"> </div>
+<table id="athleteTable">
   <tr>
-    <th>Last Name</th>
-    <th>First Name</th>
-    <th>Initial</th>
-    <th>Sex</th>
-    <th>Team</th>
-    <th>Age</th>
-    <th>Preferred Name</th>
+    <th id="lastName">Last Name</th>
+    <th id="firstName">First Name</th>
+    <th id="initial">Initial</th>
+    <th id="sex">Sex</th>
+    <th id="team">Team</th>
+    <th id="age">Age</th>
+    <th id="prefName">Preferred Name</th>
   </tr>
 
   <% i = 1
-  @athletes.each do |athlete| %>
+  last_char = ''
+  @athletes.each do |athlete|
+    l = athlete.Last_name.upcase[0,1] 
+    
+    if last_char != '' && last_char != l -%>
+</table>
+<table id="athleteTable">
+ <% end -%>
     <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
-      <td><%= link_to athlete.Last_name, athlete %></td>
-      <td><%= h athlete.First_name %></td>
-      <td><%= h athlete.Initial %></td>
-      <td><%= h athlete.Ath_Sex %></td>
-      <td><%= link_to athlete.team.Team_abbr, :controller => "athletes", :team_id => athlete.team %></td>
-      <td style="text-align: right"><%= h athlete.Ath_age %></td>
-      <td><%= h athlete.Pref_name %></td>
+      <%= last_char != l ? '<a name="' + l + '">' : '' %>
+      <td id="lastName"><%= link_to athlete.Last_name, athlete %></td>
+      <%= last_char != l ? '</a>' : '' %>
+      <td id="firstName"><%= h athlete.First_name %></td>
+      <td id="initial"><%= h athlete.Initial %></td>
+      <td id="sex"><%= h athlete.Ath_Sex %></td>
+      <td id="team"><%= link_to athlete.team.Team_abbr, :controller => "athletes", :team_id => athlete.team %></td>
+      <td id="age" style="text-align: right"><%= h athlete.Ath_age %></td>
+      <td id="prefName"><%= h athlete.Pref_name %></td>
     </tr>
-  <% i += 1
+  <% last_char = l
+    i += 1
   end %>
 </table>

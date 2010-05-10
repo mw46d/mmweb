@@ -1,4 +1,7 @@
-<h1><%= h @athlete.Last_name %>,&nbsp;<%= h @athlete.First_name %>&nbsp;<%= h @athlete.Initial %></h1>
+<h1><%= link_to '<<', :action => "show", :id => @athlete, :direction => 'previous' %>
+  <%= h @athlete.Last_name %>,&nbsp;<%= h @athlete.First_name %>&nbsp;<%= h @athlete.Initial %>
+  <%= link_to '>>', :action => "show", :id => @athlete, :direction => 'next' %>
+</h1>
 
 <% if @athlete.entries.length > 0 %>
   <h2>Individual Events</h2>
@@ -15,7 +18,7 @@
       <th>Points</th>
     </tr>
     <% i = 1
-    @athlete.entries.sort{ |a, b| a.Event_ptr <=> b.Event_ptr }.each do |entry|
+    @athlete.entries.sort{ |a, b| a.event.Event_no <=> b.event.Event_no }.each do |entry|
       event = entry.event -%>
       <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
         <td style="text-align: right"><%= link_to event.Event_no, :controller => 'events', :action => 'results', :id => event %></td>
@@ -47,7 +50,7 @@
       <th>Points</th>
     </tr>
     <% i = 1
-    @athlete.relay_names.sort{ |a, b| a.relay.Event_ptr <=> b.relay.Event_ptr }.each do |n|
+    @athlete.relay_names.sort{ |a, b| a.relay.event.Event_no <=> b.relay.event.Event_no }.each do |n|
       relay = n.relay
       event = relay.event -%>
       <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
