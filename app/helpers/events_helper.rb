@@ -4,7 +4,11 @@ module EventsHelper
 
     s = e.Fin_stat
     if s && s.strip.length > 0
-      ret += "DQ"
+      if s.strip == "R"
+        ret += "NS"
+      else
+        ret += "DQ"
+      end
     else
       ret += time(e.Fin_Time, true)
     end
