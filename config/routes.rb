@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.filter 'small'
+  
   map.resources :events
 
   map.resources :athletes

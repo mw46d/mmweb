@@ -33,6 +33,7 @@ end
 
   <% i = 1
   last_char = ''
+  team_param = (@team ? { :team_id => @team.Team_no } : {})
   @athletes.each do |athlete|
     l = athlete.Last_name.upcase[0,1] 
     
@@ -42,12 +43,12 @@ end
  <% end -%>
     <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
       <%= last_char != l ? '<a name="' + l + '">' : '' %>
-      <td id="lastName"><%= link_to athlete.Last_name, athlete %></td>
+      <td id="lastName"><%= link_to athlete.Last_name, athlete_path(athlete, team_param) %></td>
       <%= last_char != l ? '</a>' : '' %>
       <td id="firstName"><%= h athlete.First_name %></td>
       <td id="initial"><%= h athlete.Initial %></td>
       <td id="sex"><%= h athlete.Ath_Sex %></td>
-      <td id="team"><%= link_to athlete.team.Team_abbr, :controller => "athletes", :team_id => athlete.team %></td>
+      <td id="team"><%= link_to athlete.team.Team_abbr, athletes_path(:team_id => athlete.team) %></td>
       <td id="age" style="text-align: right"><%= h athlete.Ath_age %></td>
       <td id="prefName"><%= h athlete.Pref_name %></td>
     </tr>

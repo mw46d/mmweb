@@ -1,0 +1,76 @@
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+body {
+    margin: 0px;
+}
+#head {
+    width: 100%;
+    background-color: #5b9cd2;
+    padding: 10px 0px 15px 0px;
+}
+
+#header {
+    margin: 0px 5px 0px 5px;
+}
+
+#foot {
+    width: 100%;
+    background-color: #5b9cd2;
+    padding: 8px 0px 8px 0px;
+}
+
+#footer {
+    font-size: smaller;
+    margin: 0px 5px 0px 5px;
+}
+
+#content {
+    margin: 0px 5px 0px 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+h1, .h1 {
+    font-size: 16px;
+    line-height: 23px;
+    font-weight: bold;
+    margin: 10px 0px 10px 0px;
+}
+
+h2, .h2 {
+    font-size: 16px;
+    line-height: 23px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    margin: 10px 0px 20px 0px;
+}
+
+#athleteTable {
+    margin: 0px 0px 0px 0px;
+}
+
+#athleteTable #firstName, #athleteTable #lastName, #athleteTable #prefName {
+    width: 120px;
+}
+
+#athleteTable #age, #athleteTable #initial, #athleteTable #sex, #athleteTable #team {
+    width: 45px;
+}
+
+th {
+    text-align: left;
+}
+
+tr.odd {
+    background-color: #adc2d3;
+}

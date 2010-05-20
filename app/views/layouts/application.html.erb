@@ -24,7 +24,7 @@
           <div class="h2" style="float: right">Now: <%= Time.now.strftime("%m/%d/%Y %H:%M") %></div>
         </div>
         <div id="logo" style="float: right">
-          <%= image_tag 'tt2009_150.jpg', :alt => 'TT team Picture' %>
+          <%= image_tag 'tt2010_150.jpg', :alt => 'TT team Picture' %>
         </div>
       </div>
       <div id="head_right"> </div>
@@ -35,6 +35,7 @@
         <%= link_to 'Home', :controller => "home" %><br />
         <%= link_to 'Events', :controller => "events" %><br />
         <%= link_to 'Teams', :controller => "teams" %><br />
+        <a href="<%= toggle_small %>"><%= image_tag 'Mobile.gif', :alt => "Layout for Small Screens", :title => "Layout for Small Screens", :style => "margin-top: 150px; border: 0px" %></a>
       </div>
       <div id="pageContent">
         <%= yield %>

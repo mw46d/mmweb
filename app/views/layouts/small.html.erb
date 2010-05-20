@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>MeetManager: <%= controller.controller_name %> - <%= controller.action_name %></title>
+    <%= stylesheet_link_tag 'small_layout' %>
+  </head>
+  <body>
+    <div id="head">
+      <div id="header">
+        <div class="h2" style="float: left"><%= @meet ? @meet.Meet_name1  : '' %></div>
+        <div class="h2" style="float: right">Last Update: <%= File.mtime("/export/home/marcow/TT/lastrun").strftime("%m/%d/%Y %H:%M") %></div>
+        <div style="clear: both"></div>
+        <div class="h2" style="float: left"><%= @meet ? @meet.Meet_start.strftime("%m/%d/%Y") : '' %>
+          <%= @meet && (@meet.Meet_end > @meet.Meet_start) ? " - " + @meet.Meet_end.strftime("%m/%d/%Y") : "" %>
+        </div>
+        <div class="h2" style="float: right">Now: <%= Time.now.strftime("%m/%d/%Y %H:%M") %></div>
+        <div style="clear: both"></div>
+        <div id="headNav">
+          <%= link_to 'Home', root_path %>
+          <%= link_to 'Events', events_path %>
+          <%= link_to 'Teams', teams_path %>
+        </div>
+      </div>
+    </div>
+    <div style="clear: both"></div>
+    <div id="content">
+      <%= yield %>
+      <div style="clear: both"></div>
+    </div>
+    <div id="foot">
+      <div id="footer">
+        The meet computer is always correct.
+        <div  style="float: right">
+          <a href="<%= toggle_small() %>">Large</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

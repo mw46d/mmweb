@@ -38,4 +38,14 @@ module ApplicationHelper
       ret
     end
   end
+
+  def toggle_small
+    url = url_for
+
+    if url =~ /\/small\//
+      url.sub(/\/small/, '')
+    else
+      url.sub(%r{^(http.?://[^/]*)?(.*)}) { "#{$1}/small#{$2}" }
+    end
+  end
 end
