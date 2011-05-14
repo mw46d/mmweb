@@ -7,4 +7,12 @@ class Athlete < ActiveRecord::Base
   has_many :relay_names, :class_name => "RelayName", :foreign_key => "Ath_no"
 
   acts_as_ordered :order => 'Last_name, First_name, Initial'
+
+  def middle
+    if self.Initial.blank? || self.Initial == '*'
+      ''
+    else
+      self.Initial
+    end
+  end
 end

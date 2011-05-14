@@ -1,6 +1,6 @@
 <% team_param = (@team ? { :team_id => @team.Team_no } : {}) -%>
 <h1><%= link_to '<<', athlete_path(@athlete, { :direction => 'previous' }.merge(team_param)) %>
-  <%= h @athlete.Last_name %>,&nbsp;<%= h @athlete.First_name %>&nbsp;<%= h @athlete.Initial %>
+  <%= h @athlete.Last_name %>,&nbsp;<%= h @athlete.First_name %>&nbsp;<%= h @athlete.middle %>
   <%= link_to '>>', athlete_path(@athlete, { :direction => 'next'  }.merge(team_param)) %>
 </h1>
 

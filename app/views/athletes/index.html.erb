@@ -46,7 +46,7 @@ end
       <td id="lastName"><%= link_to athlete.Last_name, athlete_path(athlete, team_param) %></td>
       <%= last_char != l ? '</a>' : '' %>
       <td id="firstName"><%= h athlete.First_name %></td>
-      <td id="initial"><%= h athlete.Initial %></td>
+      <td id="initial"><%= h athlete.middle %></td>
       <td id="sex"><%= h athlete.Ath_Sex %></td>
       <td id="team"><%= link_to athlete.team.Team_abbr, athletes_path(:team_id => athlete.team) %></td>
       <td id="age" style="text-align: right"><%= h athlete.Ath_age %></td>
