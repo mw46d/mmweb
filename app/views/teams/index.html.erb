@@ -21,5 +21,20 @@
       <td style="text-align: right"><%= h score(team.score) %></td>
     </tr>
   <% i += 1
+  end
+  a = e = r = s = 0
+  @teams.each do |t|
+    a += t.athletes.count
+    e += t.entries.to_i
+    r += t.relays.count
+    s += score(t.score).to_f
   end -%>
+  <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
+    <td>Sum</td>
+    <td></td>
+    <td style="text-align: right"><%= h a %></td>
+    <td style="text-align: right"><%= h e %></td>
+    <td style="text-align: right"><%= h r %></td>
+    <td style="text-align: right"><%= h s %></td>
+  </tr>
 </table>
