@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   def set_meet
-    @meet = Meet.find(:first)
+    @meet = Meet.first
   end
 
   def default_url_options(options = {})

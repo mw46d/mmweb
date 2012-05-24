@@ -2,7 +2,8 @@ class AthletesController < ApplicationController
   before_filter :set_team
 
   def index
-    @athletes = Athlete.find(:all, :conditions => cond, :order => "Last_name, First_name, Initial")
+    pp = (params && params[:small]) ? 15 : 2000
+    @athletes = Athlete.where(cond).paginate(:page => params[:page], :per_page => pp)
   end
 
   def show
@@ -11,9 +12,11 @@ class AthletesController < ApplicationController
     if params[:direction]
       case params[:direction]
       when /next/
-        @athlete = @athlete.next(:conditions => cond)
+        a = @athlete.next(:conditions => cond)
+	@athlete = a unless a.blank?
       when /previous/
-        @athlete = @athlete.previous(:conditions => cond)
+        a = @athlete.previous(:conditions => cond)
+	@athlete = a unless a.blank?
       end
     end
     render

@@ -3,23 +3,14 @@
   Athletes
 </h1>
 
-<div style="margin: 20px 0px 0px 0px;"> </div>
-<% last_char = ""
-anchors = {}
-@athletes.each do |athlete|
-  l = athlete.Last_name.upcase[0,1]
-
-  unless last_char == l
-    anchors[l] = l
-    last_char = l
-  end
-end
-('A' .. 'Z').each do |a|
--%>
-<%= anchors[a] ? '<a href="#' + anchors[a] + '">' : '' %><%= a %><%= anchors[a] ? '</a>' : '' %>&nbsp;
+<% if params[:small] -%>
+  <%= will_paginate @athletes %>
+<% else -%>
+  <div style="margin: 20px 0px 0px 0px;"> </div>
+  <%= alpha_links(@athletes) %>
+  <br />
+  <div style="margin: 20px 0px 0px 0px;"> </div>
 <% end -%>
-<br />
-<div style="margin: 20px 0px 0px 0px;"> </div>
 <table id="athleteTable">
   <tr>
     <th id="lastName">Last Name</th>
@@ -42,9 +33,9 @@ end
 <table id="athleteTable">
  <% end -%>
     <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
-      <%= last_char != l ? '<a name="' + l + '">' : '' %>
+      <%= raw(last_char != l ? '<a name="' + l + '">' : '') %>
       <td id="lastName"><%= link_to athlete.Last_name, athlete_path(athlete, team_param) %></td>
-      <%= last_char != l ? '</a>' : '' %>
+      <%= raw(last_char != l ? '</a>' : '') %>
       <td id="firstName"><%= h athlete.First_name %></td>
       <td id="initial"><%= h athlete.middle %></td>
       <td id="sex"><%= h athlete.Ath_Sex %></td>
@@ -56,3 +47,6 @@ end
     i += 1
   end %>
 </table>
+<% if params[:small] -%>
+  <%= will_paginate @athletes %>
+<% end -%>

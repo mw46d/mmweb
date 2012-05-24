@@ -1,18 +1,10 @@
-ActionController::Routing::Routes.draw do |map|
-  map.filter 'small'
-  
-  map.resources :events
-
-  map.resources :athletes
-
-  map.resources :scores
-  
-  map.resources :teams
-
-  map.root :controller => "home"
-  map.connect ':controller/:action/:id'
-
-  map.with_options(:controller => "home") do |site|
-    site.connect '*url', :action => 'index'
-  end
+Meetmanager::Application.routes.draw do
+  filter :small
+  resources :events
+  resources :athletes
+  resources :scores
+  resources :teams
+  match '/' => 'home#index', :as => :root
+  match '/:controller(/:action(/:id))'
+#  match 'controllerhome' => '#index', :as => :with_options
 end

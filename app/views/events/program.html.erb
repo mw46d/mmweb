@@ -21,7 +21,14 @@
   <br />
 <% end -%>
 
-<% if @event.seeded? %>
+<% if @event.seeded? -%>
+<%   if @event.max_heat > 1
+       1.upto(@event.max_heat) do |i| -%>
+       <%= link_to "Heat #{i}", :action => "program", :id => @event, :heat => i %>
+<%     end
+     end -%>
+
+<%= will_paginate @entries %>
 <table>
   <tr>
     <th>Heat</th>
@@ -34,9 +41,16 @@
     <th>Seed Time</th>
   </tr>
 
-  <%  @event.entries.each do |e|
-    if e.Fin_heat && e.Fin_heat > 0 -%>
-    <tr class="<%= e.Fin_heat % 2 > 0 ? "odd" : "even" %>">
+  <%  i = 0
+      @entries.each do |e|
+    if e.Fin_heat && e.Fin_heat > 0
+      if @heat < 1 || @heat == e.Fin_heat -%>
+    <% if @heat > 0 
+      i += 1 -%>
+      <tr class="<%=  i % 2 > 0 ? "odd" : "even" %>">
+    <% else -%>
+      <tr class="<%= e.Fin_heat % 2 > 0 ? "odd" : "even" %>">
+    <% end -%>
       <td style="text-align: right"><%= h e.Fin_heat %></td>
       <td style="text-align: right"><%= h e.Fin_lane %></td>
       <% if e.is_a? Relay -%>
@@ -58,14 +72,17 @@
       <% end -%>
       <td style="text-align: right"><%= h time(e.ActualSeed_time) %></td>
     </tr>
-    <% end
+      <% end
+       end
   end -%>
 </table>
+<%= will_paginate @entries %>
 <% else -%>
 <p><b>
   This event is not seeded yet. This page will be updated with the heat/lane
   assignments once the seeding is completed.
   </b></p>
+<%= will_paginate @entries %>
 <table>
   <tr>
     <th>No.</th>
@@ -77,8 +94,9 @@
     <th>Seed Time</th>
   </tr>
 
-  <% i = 1
-  @event.entries.sort{ |a, b| EntryBase.time_compare(a.ActualSeed_time, b.ActualSeed_time) }.each do |e| -%>
+  <% page = params[:page].to_i
+  i = @per_page * (page > 0 ? page - 1 : 0) + 1
+  @entries.each do |e| -%>
     <tr class="<%= i % 2 > 0 ? "odd" : "even" %>">
       <td style="text-align: right"><%= i %></td>
       <% i += 1
@@ -103,4 +121,5 @@
     </tr>
   <% end -%>
 </table>
+<%= will_paginate @entries %>
 <% end -%>

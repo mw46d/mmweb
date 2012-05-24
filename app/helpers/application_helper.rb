@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def time(f, ns = false)
-    if f.nil? || f == 0
+    if f.nil? || f.to_i == 0 || f.to_i == 9999
       if ns
         ""
       else

@@ -64,6 +64,13 @@ do
     then
         mv $TEMPDIR/$j $j
         mysql --user="$MYSQL_USER" --password="$MYSQL_PW" --execute="source $j;" $MYSQL_DB
+
+        # XXX Hack to get the NT entries to the end!!
+        if [ $i == "Entry" || $i == "Relay" ]
+        then
+            mysql --user="$MYSQL_USER" --password="$MYSQL_PW" --execute="UPDATE $i set ActualSeed_time = 9999 WHERE ActualSeed_time IS NULL OR ActualSeed_time = 0"
+        fi
+
         update_last=1
     fi
 

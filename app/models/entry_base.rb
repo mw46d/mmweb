@@ -1,4 +1,5 @@
 class EntryBase < ActiveRecord::Base
+  self.abstract_class = true
   belongs_to :event, :class_name => "Event", :foreign_key => "Event_ptr"
 
   def result_compare(b)

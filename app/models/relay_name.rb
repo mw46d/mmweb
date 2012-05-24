@@ -1,5 +1,5 @@
 class RelayName < ActiveRecord::Base
-  set_table_name "RelayNames"
+  self.table_name = "RelayNames"
 
   belongs_to :athlete, :class_name => "Athlete", :foreign_key => "Ath_no"
   belongs_to :event, :class_name => "Event", :foreign_key => "Event_ptr"

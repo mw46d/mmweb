@@ -1,6 +1,7 @@
 # Load vendored gems
-VENDOR_GEMS_ROOT = File.dirname(__FILE__) + '/gems'
+VENDOR_GEMS_ROOT = File.dirname(__FILE__) + '/ruby/1.9.1/gems'
 vendored_gem_dirs = ["#{VENDOR_GEMS_ROOT}/*"]
+
 vendored_gem_dirs << "#{VENDOR_GEMS_ROOT}-jruby/*" if RUBY_PLATFORM =~ /java/
 vendored_gem_dirs.each do |vd|
   Dir[vd].map do |d|

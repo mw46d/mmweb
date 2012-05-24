@@ -20,7 +20,7 @@
         <div style="clear: both"></div>
         <div id="headNav">
           <%= link_to 'Home', root_path %>
-          <%= link_to 'Events', events_path %>
+          <%= link_to 'Events', events_path(:stroke => Event.strokes[0][:stroke], :relay => Event.strokes[0][:relay], :long => Event.strokes[0][:long]) %>
           <%= link_to 'Teams', teams_path %>
         </div>
       </div>

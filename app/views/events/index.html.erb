@@ -1,5 +1,13 @@
 <h1>Meet Events</h1>
 
+
+<% unless params[:small].blank? && params[:stroke].blank?
+     Event.strokes.each do |s| -%>
+       <%= link_to s[:name], :stroke => s[:stroke], :relay => s[:relay], :long => s[:long] %>
+<%   end
+   end -%>
+
+<%= will_paginate @events %>
 <table>
   <tr>
     <th style="width: 20px">No</th>
@@ -23,3 +31,4 @@
 <% i += 1
 end %>
 </table>
+<%= will_paginate @events %>
