@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
 
     h =  opts.delete(:heat)
 
-    if h > 0
+    if !h.blank? && h > 0
       w_opts[:Fin_heat] = h
       order = "Fin_heat, Fin_lane"
     elsif seeded?
@@ -43,9 +43,15 @@ class Event < ActiveRecord::Base
     end
 
     if self.relay?
-      Relay.where(w_opts).order(order).paginate(opts)
+      klass = Relay
     else
-      Entry.where(w_opts).order(order).paginate(opts)
+      klass = Entry
+    end
+
+    if opts[:per_page]
+      klass.where(w_opts).order(order).paginate(opts)
+    else
+      klass.where(w_opts).order(order)
     end
   end
 
