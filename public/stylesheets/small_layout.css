@@ -10,17 +10,20 @@ body {
 #head {
     width: 100%;
     background-color: #5b9cd2;
-    padding: 10px 0px 15px 0px;
 }
 
 #header {
     margin: 0px 5px 0px 5px;
 }
 
+#headNav {
+    padding: 5px 0px 0px 0px;
+}
+
 #foot {
     width: 100%;
     background-color: #5b9cd2;
-    padding: 8px 0px 8px 0px;
+    padding: 3px 0px 3px 0px;
 }
 
 #footer {
@@ -35,15 +38,13 @@ body {
 }
 
 h1, .h1 {
-    font-size: 16px;
-    line-height: 23px;
+    font-size: 13px;
     font-weight: bold;
-    margin: 10px 0px 10px 0px;
+    margin: 8px 0px 10px 0px;
 }
 
 h2, .h2 {
-    font-size: 16px;
-    line-height: 23px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -60,10 +61,14 @@ table {
 }
 
 #athleteTable #firstName, #athleteTable #lastName, #athleteTable #prefName {
-    width: 120px;
+    width: 100px;
 }
 
-#athleteTable #age, #athleteTable #initial, #athleteTable #sex, #athleteTable #team {
+#athleteTable #age, #athleteTable #initial, #athleteTable #sex {
+    width: 45px;
+}
+
+#athleteTable #team {
     width: 45px;
 }
 
