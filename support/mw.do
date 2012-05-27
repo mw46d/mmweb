@@ -1,7 +1,7 @@
 #!/bin/bash
 
-MYSQL_USER=foo
-MYSQL_PW=foo
+MYSQL_USER=root
+MYSQL_PW=root
 MYSQL_DB=meetmanager_development
 
 TEMPDIR=`mktemp -d`  || exit 1
@@ -31,7 +31,7 @@ do
     mdb-schema -T $i "$db" mysql > $TEMPDIR/$i.t
     sed -e 's/^--*$//' -e 's/DROP TABLE /&IF EXISTS /g' \
 	< $TEMPDIR/$i.t > $TEMPDIR/$i.table
-    mdb-export -I "$db" $i > $TEMPDIR/$i.d
+    mdb-export -I mysql "$db" $i > $TEMPDIR/$i.d
     echo "TRUNCATE $i;" > $TEMPDIR/$i.data
     sed -e 's/[)]$/);/g' \
 	-e 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\) [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/\3-\1-\2/g' \
@@ -66,9 +66,9 @@ do
         mysql --user="$MYSQL_USER" --password="$MYSQL_PW" --execute="source $j;" $MYSQL_DB
 
         # XXX Hack to get the NT entries to the end!!
-        if [ $i == "Entry" || $i == "Relay" ]
+        if [ $i == "Entry" -o $i == "Relay" ]
         then
-            mysql --user="$MYSQL_USER" --password="$MYSQL_PW" --execute="UPDATE $i set ActualSeed_time = 9999 WHERE ActualSeed_time IS NULL OR ActualSeed_time = 0"
+            mysql --user="$MYSQL_USER" --password="$MYSQL_PW" --execute="UPDATE $i set ActualSeed_time = 9999 WHERE ActualSeed_time IS NULL OR ActualSeed_time = 0" $MYSQL_DB
         fi
 
         update_last=1

@@ -19,7 +19,6 @@ class EventsController < ApplicationController
 
   def program
     @event = Event.find(params[:id])
-    @heat = params[:heat].to_i
 
     if params[:direction]
       case params[:direction]
@@ -32,12 +31,7 @@ class EventsController < ApplicationController
       end
     end
 
-    if params[:small] && @heat < 1
-      @heat = 1 if @event.max_heat
-    end
-
-    @per_page = (params && params[:small]) ? 15 : 200
-    @entries = @event.entries({:heat => @heat, :page => params[:page], :per_page => @per_page})
+    program_entries
   end
 
   def results
@@ -53,8 +47,21 @@ class EventsController < ApplicationController
     end
 
     if ! @event.scored?
+      program_entries
       render :action => "program"
       return
     end
+  end
+
+  private
+  def program_entries
+    @heat = params[:heat].to_i
+
+    if params[:small] && @heat < 1
+      @heat = 1 if @event.max_heat > 0
+    end
+
+    @per_page = (params && params[:small]) ? 15 : 200
+    @entries = @event.entries({:heat => @heat, :page => params[:page], :per_page => @per_page})
   end
 end

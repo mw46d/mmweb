@@ -11,7 +11,7 @@
     <div id="head">
       <div id="header">
         <div class="h2" style="float: left"><%= @meet ? @meet.Meet_name1  : '' %></div>
-        <div class="h2" style="float: right">Last Update: <%= File.mtime("/export/home/marcow/TT/lastrun").strftime("%m/%d/%Y %H:%M") %></div>
+        <div class="h2" style="float: right">Last Update: <%= @lastrun.strftime("%m/%d/%Y %H:%M") %></div>
         <div style="clear: both"></div>
         <div class="h2" style="float: left"><%= @meet ? @meet.Meet_start.strftime("%m/%d/%Y") : '' %>
           <%= @meet && (@meet.Meet_end > @meet.Meet_start) ? " - " + @meet.Meet_end.strftime("%m/%d/%Y") : "" %>

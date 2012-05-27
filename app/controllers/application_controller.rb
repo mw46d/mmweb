@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   def set_meet
     @meet = Meet.first
+
+    @lastrun = 0
+    @lastrun = File.mtime("#{RAILS_ROOT}/support/lastrun") if File.exist?("#{RAILS_ROOT}/support/lastrun")
   end
 
   def default_url_options(options = {})
