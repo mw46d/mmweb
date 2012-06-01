@@ -11,7 +11,7 @@ class EventsController < ApplicationController
 
     if params[:long]
       opts += " AND " if opts.length > 0
-      opts += params[:long].to_i == 1 ? "Event_ptr < 50" : "Event_ptr > 50"
+      opts += params[:long].to_i == 1 ? "Event_no < 50" : "Event_no > 50"
     end
 
     @events = Event.where(opts).paginate(:page => params[:page], :per_page => pp)

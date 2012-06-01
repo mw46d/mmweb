@@ -4,4 +4,6 @@
 vendor/ruby/*
 support/*.table
 support/*.data
-suport/lastrun
+support/lastrun
+support/*.zip
+support/*.ZIP
