@@ -1,4 +1,0 @@
-/usr/bin/ruby1.9.1 extconf.rb 
-<internal:lib/rubygems/custom_require>:29:in `require': no such file to load -- mkmf (LoadError)
-	from <internal:lib/rubygems/custom_require>:29:in `require'
-	from extconf.rb:10:in `<main>'

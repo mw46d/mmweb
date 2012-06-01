@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 source "http://gems.github.com"
 
-gem "rails", "3.2.3"
+gem "rails", "3.2.5"
 gem "mysql"
 gem "routing-filter"
 gem 'will_paginate', '~> 3.0'
