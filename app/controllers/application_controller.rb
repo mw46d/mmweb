@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def set_meet
     @meet = Meet.first
 
-    @lastrun = 0
+    @lastrun = Time.at(0)
     @lastrun = File.mtime("#{RAILS_ROOT}/support/lastrun") if File.exist?("#{RAILS_ROOT}/support/lastrun")
   end
 

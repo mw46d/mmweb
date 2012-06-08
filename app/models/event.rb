@@ -126,7 +126,7 @@ class Event < ActiveRecord::Base
   def self.strokes
     return @strokes unless @strokes.nil?
 
-    s_array = Event.select("Event_stroke, Ind_rel, Event_dist").where("Low_age = 11").uniq
+    s_array = Event.select("Event_stroke, Ind_rel, Event_dist").where("Low_age = 11").order("Event_no").uniq
 
     @strokes = []
     s_array.each do |s|
@@ -144,15 +144,15 @@ class Event < ActiveRecord::Base
 	end
 
 	name += "Free"
-	name += " Relay" if s.Ind_rel === 'R'
+	name += " Rly" if s.Ind_rel === 'R'
       when /B/
-	name = "Backstroke"
+	name = "Back"
       when /C/
-	name = "Breaststroke"
+	name = "Breast"
       when /D/
-	name = "Butterfly"
+	name = "Fly"
       when /E/
-	name = s.Ind_rel === 'R' ? "Medley Relay" : "Individual Medley"
+	name = s.Ind_rel === 'R' ? "Medley Rly" : "Ind. Medley"
       else
 	name = "Unknown"
       end

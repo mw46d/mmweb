@@ -1,0 +1,9 @@
+<div id="_progress">
+  <% if @running -%>
+  Pid: <%= @pid %> <%= link_to 'Update', current_url %>
+  <br />
+  <% end -%>
+  <pre>
+<%= h @log %>
+  </pre>
+</div>

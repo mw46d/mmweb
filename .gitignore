@@ -2,6 +2,7 @@
 .#*
 *~
 vendor/ruby/*
+support/*.log
 support/*.table
 support/*.data
 support/lastrun

@@ -25,13 +25,33 @@ then
     exit 1
 fi
 
+mdb-schema --drop-table 2>&1 | fgrep -q 'invalid option'
+if [ $? -eq 0 ]
+then
+    unset mdb_drop_option
+    mdb_i_option="-I"
+    old_mdb=1
+else
+    mdb_drop_option="--drop-table"
+    mdb_i_option="-I mysql"
+    old_mdb=0
+fi
+
 for i in Athlete Entry Event Meet RecordsbyEvent Records RecordTags Relay RelayNames Session Sessitem Team
 do
     echo "Extract $i"
-    mdb-schema -T $i "$db" mysql > $TEMPDIR/$i.t
-    sed -e 's/^--*$//' -e 's/DROP TABLE /&IF EXISTS /g' \
-	< $TEMPDIR/$i.t > $TEMPDIR/$i.table
-    mdb-export -I mysql "$db" $i > $TEMPDIR/$i.d
+    mdb-schema $mdb_drop_option -T $i "$db" mysql > $TEMPDIR/$i.t
+
+    if [ $old_mdb -gt 0 ]
+    then
+        sed -e 's/^--*$//' -e 's/DROP TABLE /&IF EXISTS /g' \
+	    < $TEMPDIR/$i.t > $TEMPDIR/$i.table
+    else
+        sed -e 's/^--*$//' \
+	    < $TEMPDIR/$i.t > $TEMPDIR/$i.table
+    fi
+
+    mdb-export $mdb_i_option "$db" $i > $TEMPDIR/$i.d
     echo "TRUNCATE $i;" > $TEMPDIR/$i.data
     sed -e 's/[)]$/);/g' \
 	-e 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\) [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/\3-\1-\2/g' \

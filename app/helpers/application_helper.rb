@@ -48,4 +48,11 @@ module ApplicationHelper
       url.sub(%r{^(http.?://[^/]*)?(.*)}) { "#{$1}/small#{$2}" }
     end
   end
+
+  def current_url(overwrite={})
+    p = params.dup
+    p.delete(:controller)
+    p.delete(:action)
+    url_for :only_path => false, :params => p.merge(overwrite)
+  end
 end

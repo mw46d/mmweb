@@ -1,0 +1,12 @@
+<h1>Backup File Upload</h1>
+
+<%= form_tag({:action => :upload}, :multipart => true) do %>
+  <%= label_tag :pin, "Little PIN to secure this form:" %>
+  <%= text_field_tag :pin %>
+  <br />
+  <%= label_tag :backup, "MeetManager Backup ZIP file:" %>
+  <%= file_field_tag :backup %>
+  <br />
+  <%= submit_tag "Upload" %>
+<% end %>
+
