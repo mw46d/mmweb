@@ -26,7 +26,7 @@ class AdminController < ApplicationController
 
   def upload
     if request.post?
-      if params[:pin].to_i == 170898
+      if params[:pin].to_i == 1111
         uploaded_io = params[:backup]
         name = File.basename(uploaded_io.original_filename)
         File.open(Rails.root.join('support', name), 'wb') do |file|
